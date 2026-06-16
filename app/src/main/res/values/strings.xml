@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">CandleVision</string>
+    <string name="app_subtitle">Trading AI · Professeur de chandeliers</string>
+
+    <!-- Home -->
+    <string name="take_photo">📸 Prendre une photo du chart</string>
+    <string name="import_gallery">🖼️ Importer depuis la galerie</string>
+    <string name="recent_analyses">Dernières analyses</string>
+    <string name="no_history">Aucune analyse pour le moment.\nImportez un graphique pour commencer.</string>
+    <string name="settings">Paramètres</string>
+
+    <!-- Analysis -->
+    <string name="analyze_chart">🔍 Analyser ce graphique</string>
+    <string name="analyzing">Analyse en cours…</string>
+    <string name="chart_image">Graphique de trading</string>
+
+    <!-- Result sections -->
+    <string name="section_direction">📈 DIRECTION DU MARCHÉ</string>
+    <string name="section_trend">📊 RÉSUMÉ DE LA TENDANCE</string>
+    <string name="section_risk">⚠️ NIVEAU DE RISQUE</string>
+    <string name="section_analysis">🎓 ANALYSE COMPLÈTE</string>
+    <string name="section_zones">🎯 ZONES IMPORTANTES</string>
+    <string name="section_scenario">🔮 SCÉNARIO PROBABLE</string>
+    <string name="section_advice">💡 CONSEIL DU PROFESSEUR</string>
+
+    <string name="disclaimer">⚠️ Analyse éducative uniquement. Aucune promesse de gain. Toute décision de trading reste sous votre responsabilité.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_api_key">Clé API Anthropic</string>
+    <string name="settings_api_key_hint">sk-ant-…</string>
+    <string name="settings_api_key_help">Votre clé reste stockée localement sur l\'appareil et n\'est utilisée que pour analyser vos graphiques.</string>
+    <string name="settings_language">Langue de l\'analyse</string>
+    <string name="settings_market">Marché par défaut</string>
+    <string name="settings_save">Enregistrer</string>
+    <string name="settings_saved">Paramètres enregistrés ✔</string>
+
+    <string name="lang_french">Français</string>
+    <string name="lang_darija">Darija marocaine</string>
+
+    <string name="market_crypto">Crypto</string>
+    <string name="market_forex">Forex</string>
+    <string name="market_stocks">Actions</string>
+
+    <!-- Errors -->
+    <string name="error_no_api_key">Veuillez d\'abord saisir votre clé API dans les Paramètres.</string>
+    <string name="error_generic">Une erreur est survenue pendant l\'analyse.</string>
+    <string name="error_network">Problème de connexion. Vérifiez votre réseau et réessayez.</string>
+    <string name="error_no_camera">Aucune application appareil photo disponible.</string>
+    <string name="permission_camera_denied">Permission appareil photo refusée.</string>
+    <string name="retry">Réessayer</string>
+</resources>

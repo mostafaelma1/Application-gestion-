@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Captured photos and imported charts live in the app's internal files dir. -->
+    <files-path name="charts" path="charts/" />
+    <cache-path name="cache" path="." />
+</paths>
