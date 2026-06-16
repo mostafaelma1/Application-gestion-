@@ -1,98 +1,102 @@
-# CandleVision — Trading AI 📈
+# MenuCalc — Coût des menus 🍲
 
-CandleVision is a native Android app that turns a **photo or screenshot of a
-trading chart** into a clear, pedagogical analysis — like a personal trading
-teacher. The analysis runs **100% on the device, offline and free**: no API key,
-no account, no internet. The app reads the **green / red candlesticks** and the
-**trend** directly from the image.
+MenuCalc est une application Android native pour **calculer le coût d'un menu
+en restauration collective** (cantine, hôpital, école, entreprise…). On saisit
+les **ingrédients** et leurs prix d'achat, on compose des **plats** (fiches
+techniques), puis des **menus** servis à un nombre de couverts donné — et
+l'application calcule le **coût par portion**, le **coût par personne**, le
+**coût total** du service et un **prix de vente conseillé**.
 
-> ⚠️ **Educational tool only.** CandleVision never promises gains. The on-device
-> analysis is a heuristic (it reads candle colors, trend and volatility) — useful
-> to learn, but not a financial advisor. Every trading decision is your own.
-
----
-
-## ✨ Features
-
-- **Home screen** — capture a chart with the camera or import a screenshot from
-  the gallery, with the 5 most recent analyses listed below.
-- **Analysis screen** — shows the chart, an "Analyze" button, a short loading
-  indicator, then a structured result:
-  - 📈 Direction du marché — *Achat possible / Vente possible / Attente / Zone dangereuse*
-  - 📊 Résumé de la tendance — *Haussière / Baissière / Latérale*
-  - ⚠️ Niveau de risque — *Faible / Moyen / Élevé*
-  - 🎓 Analyse complète (pédagogique)
-  - 🎯 Zones importantes — supports / résistances / zone d'entrée
-  - 🔮 Scénario probable
-  - 💡 Conseil du professeur
-- **Local history** — every analysis is saved to **SQLite (Room)** with the date,
-  a thumbnail and the market direction; tap any item to reopen it.
-- **Settings** — choose the analysis **language** (Français / Darija) and the
-  **default market** (Crypto / Forex / Actions). No API key needed.
+Tout fonctionne **100% en local, hors-ligne et gratuitement** : aucun compte,
+aucune clé API, aucune connexion internet. Toutes les données restent sur
+l'appareil (SQLite/Room).
 
 ---
 
-## 🧠 How the on-device analysis works
+## ✨ Fonctionnalités
 
-`LocalChartAnalyzer` processes the screenshot with plain image processing — no
-network, no ML model download:
+- **Accueil** — accès aux trois espaces : Ingrédients, Plats & recettes, Menus.
+- **Ingrédients** — banque de matières premières : nom, unité (kg, L, pièce…)
+  et prix d'achat par unité. Ajout / modification / suppression.
+- **Plats & recettes (fiche technique)** — un plat produit un nombre de
+  portions à partir d'une liste d'ingrédients quantifiés. L'app calcule en
+  direct le **coût matière total** et le **coût par portion**.
+- **Menus** — on regroupe des plats, on saisit le **nombre de couverts**, un
+  pourcentage de **frais généraux** et une **marge**. L'app affiche :
+  - Coût matière / personne
+  - Frais généraux / personne
+  - Coût de revient / personne
+  - Marge / personne
+  - **Prix de vente conseillé / personne**
+  - **Food cost %**
+  - Coût matière total, chiffre d'affaires et bénéfice estimé pour tout le service.
+- **Réglages** — choix de la **devise** (DH, €, $…).
 
-1. Each pixel is classified by **HSV color** as a bullish (green) or bearish
-   (red) candle pixel, ignoring the background and grid.
-2. The **trend** is estimated from how the average price level drifts from the
-   left third to the right third of the chart (top of screen = higher price).
-3. **Volatility** is the spread of the per-column price levels.
-4. Those facts (bull/bear ratio, trend slope, volatility) are turned into a
-   teacher-style explanation in **French** or **Moroccan Darija**.
+---
 
-Works best on standard green/red candlestick charts (Binance, TradingView,
-MetaTrader…). If no clear candles are detected, the app says so instead of
-inventing an analysis.
+## 🧮 Modèle de calcul
+
+```
+Coût d'un plat        = Σ (quantité ingrédient × prix unitaire)
+Coût par portion      = coût du plat ÷ nombre de portions
+Coût matière (CM/pers)= Σ coût/portion des plats du menu
+Frais généraux        = CM × frais%
+Coût de revient       = CM + frais généraux
+Marge                 = coût de revient × marge%
+Prix de vente / pers. = coût de revient + marge
+Food cost %           = CM ÷ prix de vente × 100
+Totaux service        = valeurs/personne × nombre de couverts
+```
+
+La logique de calcul est isolée dans `calc/CostCalculator.kt` (fonctions pures,
+sans dépendance Android).
 
 ---
 
 ## 🏗️ Tech stack
 
-| Concern        | Choice                                            |
-| -------------- | ------------------------------------------------- |
-| Language       | Kotlin                                            |
-| UI             | Android Views + Material 3 + ViewBinding          |
-| Persistence    | Room (SQLite)                                      |
-| Analysis       | On-device image processing (offline, free)        |
-| Async          | Kotlin Coroutines                                  |
-| Min / Target   | Android 7.0 (API 24) / Android 14 (API 34)        |
+| Concern        | Choix                                            |
+| -------------- | ------------------------------------------------ |
+| Langage        | Kotlin                                           |
+| UI             | Android Views + Material 3 + ViewBinding         |
+| Persistance    | Room (SQLite)                                     |
+| Async          | Kotlin Coroutines                                |
+| Min / Target   | Android 7.0 (API 24) / Android 14 (API 34)       |
 
-No internet permission. No third-party network SDK.
+Aucune permission, aucune connexion internet.
 
 ---
 
-## 🚀 Getting started
+## 🚀 Démarrage
 
-1. Open the project in **Android Studio** (Hedgehog or newer) — it creates
-   `local.properties` with your `sdk.dir` automatically. From the command line,
-   copy `local.properties.sample` to `local.properties` and set `sdk.dir`.
-2. Build & run:
+1. Ouvrir le projet dans **Android Studio** — `local.properties` est créé
+   automatiquement avec votre `sdk.dir`. En ligne de commande, copier
+   `local.properties.sample` vers `local.properties` et renseigner `sdk.dir`.
+2. Build & run :
    ```bash
    ./gradlew assembleDebug
    ```
 
-A pre-built APK is also published automatically by GitHub Actions on every push
-to the development branch — see the repository **Releases** for a direct download.
+Un APK est aussi publié automatiquement par GitHub Actions à chaque push sur la
+branche de développement — voir les **Releases** du dépôt pour un téléchargement
+direct.
 
 ---
 
-## 📂 Project structure
+## 📂 Structure du projet
 
 ```
-app/src/main/java/com/candlevision/app/
-├── CandleVisionApp.kt         # Application: DB + prefs holders
-├── MainActivity.kt            # Home: capture / import / history
-├── AnalysisActivity.kt        # Analyze a chart or view a saved analysis
-├── SettingsActivity.kt        # Language / market
-├── analysis/
-│   └── LocalChartAnalyzer.kt  # Offline on-device chart analysis
-├── api/AnalysisResult.kt      # Result model (7 sections)
-├── data/                      # Room entity, DAO, database, Prefs
-├── ui/HistoryAdapter.kt       # RecyclerView for the history list
-└── util/                      # ImageUtils (downscale/EXIF), Ui colors
+app/src/main/java/com/menucalc/app/
+├── MenuCalcApp.kt            # Application : DB + prefs
+├── MainActivity.kt           # Accueil (navigation)
+├── IngredientsActivity.kt    # Ingrédients : liste + ajout/édition
+├── DishesActivity.kt         # Liste des plats
+├── DishEditActivity.kt       # Fiche technique + recette + coûts
+├── MenusActivity.kt          # Liste des menus
+├── MenuEditActivity.kt       # Composition + résultat chiffré
+├── SettingsActivity.kt       # Devise
+├── calc/CostCalculator.kt    # Moteur de calcul (pur)
+├── data/                     # Entités Room, DAO, base, Prefs
+├── ui/                       # Adapters RecyclerView
+└── util/Money.kt             # Formatage montants / %
 ```

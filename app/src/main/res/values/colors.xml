@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark "trading terminal" palette. -->
-    <color name="bg">#0E1116</color>
-    <color name="surface">#171C24</color>
-    <color name="surface_variant">#1F2630</color>
-    <color name="stroke">#2A323D</color>
+    <!-- Palette "cuisine pro" : vert frais + orange accent, fond clair. -->
+    <color name="bg">#F3F6F2</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#EDF3EC</color>
+    <color name="stroke">#DCE4DA</color>
 
-    <color name="primary">#F0B90B</color>      <!-- candle gold -->
-    <color name="primary_dark">#C99A06</color>
-    <color name="on_primary">#0E1116</color>
+    <color name="primary">#2E7D32</color>
+    <color name="primary_dark">#1B5E20</color>
+    <color name="on_primary">#FFFFFF</color>
 
-    <color name="text_primary">#F5F7FA</color>
-    <color name="text_secondary">#9AA7B5</color>
+    <color name="accent">#EF6C00</color>
 
-    <color name="bull">#26A69A</color>          <!-- green candle -->
-    <color name="bear">#EF5350</color>          <!-- red candle -->
-    <color name="neutral">#8C9AAB</color>
+    <color name="text_primary">#1B211B</color>
+    <color name="text_secondary">#5F6B5F</color>
 
-    <color name="risk_low">#26A69A</color>
-    <color name="risk_medium">#F0B90B</color>
-    <color name="risk_high">#EF5350</color>
+    <color name="positive">#2E7D32</color>
+    <color name="warning">#EF6C00</color>
+    <color name="danger">#C62828</color>
 
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>

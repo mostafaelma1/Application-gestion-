@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CandleVision"
+rootProject.name = "MenuCalc"
 include(":app")

@@ -2,16 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Analysis runs fully on-device: no internet permission needed. -->
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- The camera is optional: the app still works with gallery import only. -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <!-- Tout le calcul est local : aucune permission, aucune connexion. -->
 
     <application
-        android:name=".CandleVisionApp"
+        android:name=".MenuCalcApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CandleVision"
+        android:theme="@style/Theme.MenuCalc"
         tools:targetApi="34">
 
         <activity
@@ -32,24 +26,33 @@
         </activity>
 
         <activity
-            android:name=".AnalysisActivity"
+            android:name=".IngredientsActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".DishesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".DishEditActivity"
+            android:exported="false"
+            android:parentActivityName=".DishesActivity" />
+
+        <activity
+            android:name=".MenusActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".MenuEditActivity"
+            android:exported="false"
+            android:parentActivityName=".MenusActivity" />
 
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
-
-        <!-- Lets the camera app write the captured photo into our own storage. -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
     </application>
 </manifest>

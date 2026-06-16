@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.candlevision.app"
+    namespace = "com.menucalc.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.candlevision.app"
+        applicationId = "com.menucalc.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

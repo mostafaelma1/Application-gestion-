@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<full-backup-content>
-    <!-- Do not back up the saved API key. -->
-    <exclude domain="sharedpref" path="candlevision_prefs.xml" />
-</full-backup-content>
+<full-backup-content />
