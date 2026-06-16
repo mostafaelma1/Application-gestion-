@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Network access for the Claude Vision API. -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Analysis runs fully on-device: no internet permission needed. -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- The camera is optional: the app still works with gallery import only. -->

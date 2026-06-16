@@ -1,18 +1,8 @@
-import java.util.Properties
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
 }
-
-// Optional: read a default Anthropic API key from local.properties so it is not
-// hard-coded in source. The user can also enter / override it in the Settings screen.
-val localProps = Properties().apply {
-    val f = rootProject.file("local.properties")
-    if (f.exists()) f.inputStream().use { load(it) }
-}
-val defaultApiKey: String = (localProps.getProperty("ANTHROPIC_API_KEY") ?: "")
 
 android {
     namespace = "com.candlevision.app"
@@ -24,11 +14,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        // Injected so the app can ship with an optional baked-in key.
-        buildConfigField("String", "DEFAULT_ANTHROPIC_API_KEY", "\"$defaultApiKey\"")
-        // The vision model used to analyse the chart screenshots.
-        buildConfigField("String", "CLAUDE_MODEL", "\"claude-sonnet-4-6\"")
     }
 
     buildTypes {
@@ -43,7 +28,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
 
     compileOptions {
@@ -71,7 +55,4 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
-
-    // OkHttp — talks to the Anthropic Messages API.
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

@@ -19,7 +19,6 @@ class SettingsActivity : AppCompatActivity() {
         val prefs = app.prefs
 
         // Pre-fill with the current saved values.
-        binding.inputApiKey.setText(prefs.apiKey)
         when (prefs.language) {
             Prefs.LANG_DARIJA -> binding.langDarija.isChecked = true
             else -> binding.langFrench.isChecked = true
@@ -34,8 +33,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun save(prefs: Prefs) {
-        prefs.apiKey = binding.inputApiKey.text?.toString().orEmpty()
-
         prefs.language = if (binding.langDarija.isChecked) Prefs.LANG_DARIJA else Prefs.LANG_FR
 
         prefs.market = when {

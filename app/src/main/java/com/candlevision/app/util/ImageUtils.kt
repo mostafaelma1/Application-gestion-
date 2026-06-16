@@ -18,7 +18,7 @@ import kotlin.math.roundToInt
  */
 object ImageUtils {
 
-    /** Anthropic vision recommends keeping the longest edge around this size. */
+    /** Keep the longest edge around this size to stay fast and memory-friendly. */
     private const val MAX_EDGE = 1568
     private const val JPEG_QUALITY = 85
 
@@ -49,11 +49,6 @@ object ImageUtils {
         val bitmap = decodeFromFile(path) ?: return
         val rotated = applyExifFromPath(path, bitmap)
         writeJpeg(rotated, file)
-    }
-
-    fun toBase64Jpeg(path: String): String {
-        val bytes = File(path).readBytes()
-        return android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP)
     }
 
     /** Small bitmap for the history list (cheap to decode). */

@@ -1,6 +1,6 @@
 package com.candlevision.app.api
 
-/** Parsed, structured output returned by the Claude Vision analysis. */
+/** The seven result sections produced by the on-device chart analysis. */
 data class AnalysisResult(
     val direction: String,
     val trend: String,

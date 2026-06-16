@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.candlevision.app.analysis.LocalChartAnalyzer
 import com.candlevision.app.api.AnalysisResult
-import com.candlevision.app.api.ClaudeClient
 import com.candlevision.app.data.Analysis
 import com.candlevision.app.databinding.ActivityAnalysisBinding
 import com.candlevision.app.util.ImageUtils
 import com.candlevision.app.util.Ui
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AnalysisActivity : AppCompatActivity() {
 
@@ -58,12 +60,14 @@ class AnalysisActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                val base64 = ImageUtils.toBase64Jpeg(path)
-                val result = ClaudeClient(app.prefs).analyze(base64)
+                // On-device analysis — no API key, no network.
+                val result = withContext(Dispatchers.Default) {
+                    val bitmap = ImageUtils.decodeThumb(path, 1200)
+                        ?: error("image illisible")
+                    LocalChartAnalyzer.analyze(bitmap, app.prefs.language, app.prefs.market)
+                }
                 save(path, result)
                 render(result)
-            } catch (e: ClaudeClient.AnalysisException) {
-                showError(messageFor(e))
             } catch (e: Exception) {
                 showError(getString(R.string.error_generic))
             }
@@ -120,12 +124,6 @@ class AnalysisActivity : AppCompatActivity() {
         binding.btnAnalyze.isEnabled = true
         binding.btnAnalyze.visibility = View.VISIBLE
         binding.txtError.text = message
-    }
-
-    private fun messageFor(e: ClaudeClient.AnalysisException): String = when (e.kind) {
-        ClaudeClient.AnalysisException.Kind.NO_KEY -> getString(R.string.error_no_api_key)
-        ClaudeClient.AnalysisException.Kind.NETWORK -> getString(R.string.error_network)
-        ClaudeClient.AnalysisException.Kind.API -> "${getString(R.string.error_generic)}\n${e.message}"
     }
 
     private fun Analysis.toResult() = AnalysisResult(

@@ -27,9 +27,7 @@
 
     <!-- Settings -->
     <string name="settings_title">Paramètres</string>
-    <string name="settings_api_key">Clé API Anthropic</string>
-    <string name="settings_api_key_hint">sk-ant-…</string>
-    <string name="settings_api_key_help">Votre clé reste stockée localement sur l\'appareil et n\'est utilisée que pour analyser vos graphiques.</string>
+    <string name="settings_offline_note">✅ Analyse 100% locale et gratuite : aucune clé API, aucune connexion internet requise.</string>
     <string name="settings_language">Langue de l\'analyse</string>
     <string name="settings_market">Marché par défaut</string>
     <string name="settings_save">Enregistrer</string>
@@ -43,9 +41,7 @@
     <string name="market_stocks">Actions</string>
 
     <!-- Errors -->
-    <string name="error_no_api_key">Veuillez d\'abord saisir votre clé API dans les Paramètres.</string>
-    <string name="error_generic">Une erreur est survenue pendant l\'analyse.</string>
-    <string name="error_network">Problème de connexion. Vérifiez votre réseau et réessayez.</string>
+    <string name="error_generic">Impossible d\'analyser cette image. Essaie une capture plus nette d\'un graphique en chandeliers.</string>
     <string name="error_no_camera">Aucune application appareil photo disponible.</string>
     <string name="permission_camera_denied">Permission appareil photo refusée.</string>
     <string name="retry">Réessayer</string>
