@@ -66,8 +66,8 @@ object LocalChartAnalyzer {
                 } else {
                     continue
                 }
-                sumY[x] += y
-                cnt[x]++
+                sumY[x] = sumY[x] + y.toDouble()
+                cnt[x] = cnt[x] + 1
             }
         }
 
